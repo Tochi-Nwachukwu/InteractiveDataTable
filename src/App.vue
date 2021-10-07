@@ -61,6 +61,7 @@ export default {
   },
 
   methods: {
+    // Method to fetch all data from the API
     getAllData() {
       fetch(
         `https://www.anapioficeandfire.com/api/books/?page=${this.currentPage}&pageSize=10`
@@ -70,7 +71,7 @@ export default {
           this.books = data;
         });
     },
-
+    // Method to retrieve page numbers from pagination component
     getPageNumber(e) {
       if (e.target.innerText == "Previous" && Number(this.currentPage > 1)) {
         this.currentPage = (Number(this.currentPage) - 1).toString();
@@ -81,7 +82,7 @@ export default {
       this.getAllData();
     },
   },
-
+  // Method to implement the search functionality
   computed: {
     filteredData: function () {
       return this.books.filter((element) => {
@@ -102,6 +103,7 @@ export default {
   margin: 0px 42px;
 }
 
+/* Styles for the data table */
 .data {
   font-weight: 400;
   font-size: 16px;
@@ -124,6 +126,7 @@ export default {
   background-color: #ffffff;
 }
 
+/* Styles for the search input field */
 .input {
   display: flex;
   justify-content: end;

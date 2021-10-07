@@ -1,9 +1,11 @@
 <template>
+  <!-- This is the layout for the pagination component -->
   <div class="pagination-strip">
     <p>Showing 1 to {{ totalPages }} of {{ totalPages }} entries</p>
     <div class="util-flex">
       <p @click="pageFunction">Previous</p>
 
+      <!-- The two page numbers have classes conditionally applied -->
       <div
         @click="pageFunction"
         id="page-number"
@@ -28,6 +30,7 @@
 
 <script>
 export default {
+  // The components are exported here and the props are received here
   name: "Pagination",
   props: {
     totalPages: Number,
@@ -38,6 +41,8 @@ export default {
 </script>
 
 <style scoped>
+
+/* Styles for the pagination component go in here */
 .pagination-strip {
   display: flex;
   align-items: center;
@@ -60,6 +65,7 @@ export default {
   cursor: pointer;
 }
 
+/* styles for the active and inactive components are applied here */
 .active {
   background-color: #027bff;
   color: white;

@@ -1,4 +1,5 @@
 <template>
+  <!-- This is the layout for the table headers -->
   <div class="header">
     <h1 class="util-border">Name</h1>
     <h1 class="util-border">ISBN</h1>
@@ -11,11 +12,13 @@
 
 <script>
 export default {
+  // The header component is exported here
   name: "Header",
 };
 </script>
 
 <style scoped>
+/* The header styles are applied here */
 * {
   box-sizing: border-box;
   margin: 0;

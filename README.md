@@ -2,7 +2,7 @@
 ```
 This project was developed by Nwachukwu Tochukwu Charles
 
-it is a submission to the technical interview conducted by Data Max registrars.
+This is a submission to the technical interview conducted by Data Max registrars.
 
 This project is an interactive datatable with search and pagination functionalities.
 

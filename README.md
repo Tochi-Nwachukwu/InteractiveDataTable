@@ -1,7 +1,12 @@
 # DataTable
 ```
-This project was developed by Nwachukwu Tochukwu Charles as a submission to the technical interview conducted by Data Max registrars.
-This project is an interactive datatable with search and pagination functionalities. This was built using the VUE.JS frontend framework and data was consumed from the fire and ice API
+This project was developed by Nwachukwu Tochukwu Charles
+
+as a submission to the technical interview conducted by Data Max registrars.
+
+This project is an interactive datatable with search and pagination functionalities.
+
+This was built using the VUE.JS frontend framework and data was consumed from the fire and ice API
 
 ```
 

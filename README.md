@@ -2,7 +2,7 @@
 ```
 This project was developed by Nwachukwu Tochukwu Charles
 
-This is a submission to the technical interview conducted by Data Max registrars.
+This is a submission to the technical interview conducted by DataMax Registrars.
 
 This project is an interactive datatable with search and pagination functionalities.
 
@@ -16,7 +16,7 @@ This is a VUE.JS project.
 
 You can initialize this project by downloading all the dependencies.
 
-#Steps
+Steps
 1. Clone the repo
 
 2. cd to the project directory using your terminal

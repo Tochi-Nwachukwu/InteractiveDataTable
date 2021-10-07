@@ -17,13 +17,16 @@ This is a VUE.JS project.
 You can initialize this project by downloading all the dependencies.
 
 Steps
+
 1. Clone the repo
 
 2. cd to the project directory using your terminal
 
-3. run the command - npm install
+3. Run the command - npm install
 
 This downloads all the dependencies necessary for the project to run 
+
+4. Run the command -> npm run serve
 ```
 
 ### Compiles and hot-reloads for development

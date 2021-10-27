@@ -3,27 +3,22 @@
   <div class="pagination-strip">
     <p>Showing 1 to {{ totalPages }} of {{ totalPages }} entries</p>
     <div class="util-flex">
-      <p @click="pageFunction">Previous</p>
+      <p @click="pageFunction('Prev')">Previous</p>
 
       <!-- The two page numbers have classes conditionally applied -->
+
       <div
-        @click="pageFunction"
+        v-for="item in pagesArray.slice(1,pagesArray.length)"
         id="page-number"
         class="util-margin"
+        :key="item"
         :class="currentPage === '1' ? 'active' : 'inactive'"
+        @click="pageFunction(item)"
       >
-        1
-      </div>
-      <div
-        @click="pageFunction"
-        id="page-number"
-        class="util-margin"
-        :class="currentPage === '2' ? 'active' : 'inactive'"
-      >
-        2
+        {{ item }}
       </div>
 
-      <p @click="pageFunction">Next</p>
+      <p @click="pageFunction('Next')">Next</p>
     </div>
   </div>
 </template>
@@ -32,16 +27,34 @@
 export default {
   // The components are exported here and the props are received here
   name: "Pagination",
+  mounted() {
+    this.generateButtonArrays();
+  },
   props: {
     totalPages: Number,
     pageFunction: { type: Function },
     currentPage: String,
+    lastPage: Number,
+  },
+  data() {
+    return {
+      pagesArray: [],
+    };
+  },
+
+  // Methods to generate an aray for all the buttons
+  methods: {
+    generateButtonArrays() {
+      for (var i = 0; i <= this.lastPage; i++) {
+        this.pagesArray.push(i);
+        console.log(this.pagesArray);
+      }
+    },
   },
 };
 </script>
 
 <style scoped>
-
 /* Styles for the pagination component go in here */
 .pagination-strip {
   display: flex;

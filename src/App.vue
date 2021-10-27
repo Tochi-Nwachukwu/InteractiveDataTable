@@ -2,7 +2,12 @@
   <!-- Rendering the search input field -->
   <div class="input">
     <p>Search</p>
-    <input id="text-input" type="text" v-model="search" />
+    <input
+      id="text-input"
+      type="text"
+      v-model="search"
+      v-on:keyup="getAllData"
+    />
   </div>
 
   <!-- Rendering the table header component -->
@@ -13,7 +18,7 @@
     class="data"
     :class="index % 2 === 0 ? 'shaded-row' : 'light-row'"
     :key="item.name"
-    v-for="(item, index) in filteredData.entries()"
+    v-for="(item, index) in books.entries()"
   >
     <div class="util-border">{{ item[1].name }}</div>
     <div class="util-border">{{ item[1].isbn }}</div>
@@ -33,18 +38,19 @@
     :totalPages="books.length"
     :pageFunction="getPageNumber"
     :currentPage="currentPage"
+    :lastPage="lastPageNumber"
   />
 </template>
 
 <script>
 import Header from "./components/Header";
 import Pagination from "./components/Pagination";
+import axios from "axios";
 
 export default {
   name: "App",
   mounted() {
     this.getAllData();
-    console.log();
   },
 
   components: {
@@ -57,39 +63,40 @@ export default {
       books: [],
       search: "",
       currentPage: "1",
+      PaginationData: { lastUrl: "" },
+      lastPageNumber: 2,
     };
   },
 
   methods: {
     // Method to fetch all data from the API
-    getAllData() {
-      fetch(
-        `https://www.anapioficeandfire.com/api/books/?page=${this.currentPage}&pageSize=10`
-      )
-        .then((res) => res.json())
-        .then((data) => {
-          this.books = data;
-        });
+    getAllData(url) {
+      url = `https://www.anapioficeandfire.com/api/books/?name=${this.search}&page=${this.currentPage}&pageSize=10`;
+      axios.get(url).then((res) => {
+        this.books = res.data;
+        this.PaginationData.lastUrl = res.headers.link.split(",")[2];
+
+        this.extractPageNumber(this.PaginationData.lastUrl);
+      });
     },
     // Method to retrieve page numbers from pagination component
-    getPageNumber(e) {
-      if (e.target.innerText == "Previous" && Number(this.currentPage > 1)) {
+    getPageNumber(input) {
+      if (input == "Prev" && Number(this.currentPage > 1)) {
         this.currentPage = (Number(this.currentPage) - 1).toString();
-      } else if (e.target.innerText == "Next" && Number(this.currentPage < 2)) {
+      } else if (input == "Next" && Number(this.currentPage < 2)) {
         this.currentPage = (Number(this.currentPage) + 1).toString();
-      } else this.currentPage = e.target.innerText;
-      console.log(this.currentPage);
+      } else this.currentPage = input;
+
       this.getAllData();
+    },
+
+    extractPageNumber(str) {
+      const splitStr = str.split("page=")[1].split("&")[0];
+      this.lastPageNumber = Number(splitStr);
+      console.log(this.lastPageNumber);
     },
   },
   // Method to implement the search functionality
-  computed: {
-    filteredData: function () {
-      return this.books.filter((element) => {
-        return element.name.toLowerCase().match(this.search.toLowerCase());
-      });
-    },
-  },
 };
 </script>
 
